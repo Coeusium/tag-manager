@@ -2,35 +2,27 @@
     import {tags, limit, page} from './stores.js';
     import {onMount} from 'svelte';
     import {listTags} from 'sql-tag-system-fetch-utils';
-    import Tag from './Tag.svelte';
-    import TagView from './TagView.svelte';
+    import TagComponent from './TagComponent.svelte';
 
     onMount(async () => {
-        $tags = await listTags($page, $limit);
+        try {
+            console.log(await listTags($page, $limit))
+            $tags = await listTags($page, $limit);
+        } catch (err) {
+            console.log(err)
+        }
     });
 
     async function handleLoadMore() {
-        $page++;
-
-        const additionalTags = await listTags($page, $limit);
+        const additionalTags = await listTags(++$page, $limit);
         $tags = [...$tags, ...additionalTags];
     }
 
 </script>
 
-<div class="tag-container flex items-start content-start flex-wrap overflow-auto">
-    <TagView></TagView>
-    {#each $tags as tag}
-        <Tag {...tag}></Tag>
-    {/each}
-</div>
+<TagComponent></TagComponent>
 
 <div class="fixed bottom-5 items-center w-screen flex justify-center items-center">
     <button class="w-48 bg-blue-300 p-1 rounded-2xl focus:outline-none" on:click={handleLoadMore}>Load More</button>
 </div>
 
-<style>
-    .tag-container {
-        height: 100%;
-    }
-</style>
