@@ -20,7 +20,7 @@
 
 </script>
 
-<TagComponent></TagComponent>
+<TagComponent tags={$tags}/>
 
 <div class="fixed bottom-5 items-center w-screen flex justify-center items-center">
     <button class="w-48 bg-blue-300 p-1 rounded-2xl focus:outline-none" on:click={handleLoadMore}>Load More</button>

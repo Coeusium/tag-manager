@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
-    "postcss": "^7",
+    "postcss": "^8.2.6",
     "postcss-flexbugs-fixes": "^4",
     "postcss-preset-env": "^6.7.0"
   }
